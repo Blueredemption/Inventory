@@ -5,6 +5,7 @@ import sys
 from PyQt5.QtWidgets import QMainWindow, QDesktopWidget, QApplication
 
 from LaunchScreen import LaunchScreen
+from CollectionScreen import CollectionScreen
 from ChooseScreen import ChooseScreen
 
 class Action(QMainWindow):
@@ -12,9 +13,9 @@ class Action(QMainWindow):
     def __init__(self): # constructor
         super().__init__()
         
-        self.setSize()
+        #self.setSize() # this makes the program open full screen
+        self.setMinimumSize(1000,700)
         self.setWindowTitle('Inventory')
-        self.setStyleSheet('background-color: rgb(90, 131, 199)')
         self.launchScreen() # initiates the program at the lauch screen
 
         ## Launches the Controller
@@ -31,22 +32,21 @@ class Action(QMainWindow):
         self.setCentralWidget(self.launchScreenObject)
         self.show()
 
+    def collectionScreen(self):
+        self.collectionScreenObject = CollectionScreen(self)
+        self.setCentralWidget(self.collectionScreenObject)
+        self.show()
+
     def chooseScreen(self):
         self.chooseScreenObject = ChooseScreen(self)
         self.setCentralWidget(self.chooseScreenObject)
         self.show()
 
+
+
+
+
     ##
-
-
-
-
-
-
-
-
-
-
     def setSize(self):
         ## Sets the window location on the screen
         screen = QDesktopWidget().screenGeometry()

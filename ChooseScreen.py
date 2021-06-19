@@ -1,51 +1,66 @@
 #!/usr/bin/python3
 
-from PyQt5.QtWidgets import QFrame, QHBoxLayout, QVBoxLayout, QPushButton
+from PyQt5 import QtCore
+from PyQt5.QtGui import QFont
+from PyQt5.QtWidgets import QSizePolicy, QVBoxLayout, QHBoxLayout, QFrame, QPushButton, QLabel
 
 class ChooseScreen(QFrame):
 
     def __init__(self, parent): # constructor
         super().__init__(parent)
         self.windowClass = parent # allows calling of parent class methods
-        self.setStyleSheet('background-color: rgb(230, 150, 199)')
+        self.setStyleSheet(open('css/window.css').read())
         self.initScreen()
 
-    def initScreen(self):
-        panelLayout = QVBoxLayout()
-        
-        panelOne = QFrame()
+    def initScreen(self): # 
+        verticalBox = QVBoxLayout()
+        verticalBox.setAlignment(QtCore.Qt.AlignTop)
+        upperHBox = QHBoxLayout()
+        upperHBox.setAlignment(QtCore.Qt.AlignCenter)
+        middleHBox = QHBoxLayout()
+        middleHBox.setAlignment(QtCore.Qt.AlignCenter)
+        middleHBox.setSpacing(50)
+        middleHBox.setContentsMargins(50, 50, 50, 50)
+        lowerHBox = QHBoxLayout()
+        lowerHBox.setAlignment(QtCore.Qt.AlignRight)
 
-        layout = QHBoxLayout()
-        
-        button = QPushButton('I change to Launch Screen')
-        button.clicked.connect(self.buttonEvent)
-        layout.addWidget(button)
-        button2 = QPushButton('I am pointless!')
-        layout.addWidget(button2)
-        button3 = QPushButton('I am pointless!')
-        layout.addWidget(button3)
+        headerLabel = QLabel('What Game?', self)
+        headerLabel.setStyleSheet(open("css/headerLabels.css").read())
+        headerLabel.setMinimumSize(450,190)
+        headerLabel.setMaximumSize(450,190)
+        upperHBox.addWidget(headerLabel)
 
-        panelOne.setLayout(layout)
-        
+        mtgButton = QPushButton('', self)
+        mtgButton.setMinimumSize(350,350)
+        mtgButton.setMaximumSize(350,350)
+        mtgButton.setStyleSheet(open('css/mtgButton.css').read())
+        #mtgButton.clicked.connect(self.containerScreenEvent)
+        middleHBox.addWidget(mtgButton)
 
-        panelTwo = QFrame()
+        soonButton = QPushButton('Coming Soon...?', self) 
+        soonButton.setMinimumSize(350,350)
+        soonButton.setMaximumSize(350,350)
+        soonButton.setStyleSheet(open('css/bigButtons.css').read())
+        soonButton.setEnabled(False)
+        middleHBox.addWidget(soonButton)
 
-        layout2 = QHBoxLayout()
-        
-        button4 = QPushButton('I am pointless!')
-        layout2.addWidget(button4)
-        button5 = QPushButton('I am pointless!')
-        layout2.addWidget(button5)
-        button6 = QPushButton('I am pointless!')
-        layout2.addWidget(button6)
+        backButton = QPushButton('\u21A9', self) 
+        backButton.setMinimumSize(50,50)
+        backButton.setMaximumSize(50,50)
+        backButton.setStyleSheet(open('css/returnButtons.css').read())
+        backButton.clicked.connect(self.launchScreenEvent)
+        lowerHBox.addWidget(backButton)
 
-        panelTwo.setLayout(layout2)
+        verticalBox.addLayout(upperHBox)
+        verticalBox.addLayout(middleHBox)
+        verticalBox.addSpacing(999999) # large number to ensure max distance
+        verticalBox.addLayout(lowerHBox)
 
-        panelLayout.addWidget(panelOne)
-        panelLayout.addWidget(panelTwo)
+        self.setLayout(verticalBox)
 
-        self.setLayout(panelLayout)
-
-
-    def buttonEvent(self):
-        self.windowClass.launchScreen()
+    # Events
+    def launchScreenEvent(self):
+        self.windowClass.launchScreen() 
+    
+    #def containerScreenEvent(self):
+    #    self.windowClass.containerScreen() 
