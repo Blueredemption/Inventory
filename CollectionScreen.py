@@ -1,51 +1,80 @@
 #!/usr/bin/python3
 
-from PyQt5.QtWidgets import QFrame, QHBoxLayout, QVBoxLayout, QPushButton
+from FlowLayout import FlowLayout
+from PyQt5 import QtCore
+from PyQt5.QtWidgets import QFrame, QHBoxLayout, QLabel, QScrollArea, QVBoxLayout, QPushButton, QWidget
 
 class CollectionScreen(QFrame):
 
     def __init__(self, parent): # constructor
         super().__init__(parent)
         self.windowClass = parent # allows calling of parent class methods
-        self.setStyleSheet('background-color: rgb(230, 150, 199)')
+        self.setStyleSheet(open('css/window.css').read())
         self.initScreen()
 
     def initScreen(self):
-        panelLayout = QVBoxLayout()
-        
-        panelOne = QFrame()
+        verticalBox = QVBoxLayout()
+        verticalBox.setAlignment(QtCore.Qt.AlignTop)
 
-        layout = QHBoxLayout()
-        
-        button = QPushButton('I change to Launch Screen')
-        button.clicked.connect(self.launchScreenEvent)
-        layout.addWidget(button)
-        button2 = QPushButton('I am pointless!')
-        layout.addWidget(button2)
-        button3 = QPushButton('I am pointless!')
-        layout.addWidget(button3)
+        upperHBox = QHBoxLayout()
+        upperHBox.setAlignment(QtCore.Qt.AlignLeft)
 
-        panelOne.setLayout(layout)
-        
+        scroll = QScrollArea() # Scroll Area which contains the widgets, set as the centralWidget
+        widget = QWidget() # Widget that contains the flowLayout            
 
-        panelTwo = QFrame()
+        middleFlowLayout = FlowLayout() # The FlowLayout that contains all of the Collection buttons
+        middleFlowLayout.setSpacing(15)
 
-        layout2 = QHBoxLayout()
-        
-        button4 = QPushButton('I am pointless!')
-        layout2.addWidget(button4)
-        button5 = QPushButton('I am pointless!')
-        layout2.addWidget(button5)
-        button6 = QPushButton('I am pointless!')
-        layout2.addWidget(button6)
+        lowerHBox = QHBoxLayout()
+        lowerHBox.setAlignment(QtCore.Qt.AlignRight)
 
-        panelTwo.setLayout(layout2)
+        headerLabel = QLabel('Your Collections', self)
+        headerLabel.setStyleSheet(open("css/smallHeaderLabels.css").read())
+        headerLabel.setMinimumSize(1000,45)
+        headerLabel.setMaximumSize(1000,45)
+        upperHBox.addWidget(headerLabel)
 
-        panelLayout.addWidget(panelOne)
-        panelLayout.addWidget(panelTwo)
+        tempCollections = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+        for buttonName in tempCollections:
+            button = QPushButton(str(buttonName), self)
+            button.setMinimumSize(229,229)
+            button.setMaximumSize(229,229)
+            button.setStyleSheet(open('css/collectionButtons.css').read())
+            middleFlowLayout.addWidget(button)
 
-        self.setLayout(panelLayout)
+        newButton = QPushButton('+', self)
+        newButton.setMinimumSize(229,229)
+        newButton.setMaximumSize(229,229)
+        newButton.setStyleSheet(open('css/plusButtons.css').read())
+        newButton.clicked.connect(self.chooseScreenEvent)
+        middleFlowLayout.addWidget(newButton)
 
+        widget.setContentsMargins(0, 18, 0, 18)
+        widget.setLayout(middleFlowLayout)
+
+        #ScrollArea Properties
+        scroll.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
+        scroll.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        scroll.setStyleSheet(open("css/scrollArea.css").read())
+        scroll.setWidgetResizable(True)
+        scroll.setWidget(widget)
+
+        backButton = QPushButton('\u21A9', self) 
+        backButton.setMinimumSize(50,50)
+        backButton.setMaximumSize(50,50)
+        backButton.setStyleSheet(open('css/returnButtons.css').read())
+        backButton.clicked.connect(self.launchScreenEvent)
+        lowerHBox.addWidget(backButton)
+
+        verticalBox.addLayout(upperHBox) 
+        verticalBox.addWidget(scroll)
+        verticalBox.addSpacing(10) 
+        verticalBox.addLayout(lowerHBox)
+
+        self.setLayout(verticalBox)
 
     def launchScreenEvent(self):
         self.windowClass.launchScreen()
+
+    def chooseScreenEvent(self):
+        self.windowClass.chooseScreen() 

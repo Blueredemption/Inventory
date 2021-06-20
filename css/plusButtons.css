@@ -1,0 +1,22 @@
+QPushButton {
+    background-color: rgb(4, 6, 35); 
+    border :1px solid; 
+    border-top-color : rgb(4,6,50); 
+    border-left-color : rgb(4,6,50);  
+    border-right-color : rgb(4, 6, 25); 
+    border-bottom-color : rgb(4, 6, 25);
+
+    font-family: 'Verdana';
+    font-size: 50pt;
+}
+
+QPushButton:hover {
+    background-color: rgb(4, 6, 40);
+}
+
+QPushButton:pressed {
+    border-top-color : rgb(4, 6, 25); 
+    border-left-color : rgb(4, 6, 25); 
+    border-right-color : rgb(4,6,50); 
+    border-bottom-color : rgb(4,6,50);  
+}
