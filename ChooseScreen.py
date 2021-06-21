@@ -34,7 +34,7 @@ class ChooseScreen(QFrame):
         mtgButton.setMinimumSize(350,350)
         mtgButton.setMaximumSize(350,350)
         mtgButton.setStyleSheet(open('css/mtgButton.css').read())
-        #mtgButton.clicked.connect(self.containerScreenEvent)
+        mtgButton.clicked.connect(self.containerScreenEvent)
         middleHBox.addWidget(mtgButton)
 
         soonButton = QPushButton('Coming Soon...?', self) 
@@ -58,9 +58,9 @@ class ChooseScreen(QFrame):
 
         self.setLayout(verticalBox)
 
-    # Events
+    # navigation events
     def launchScreenEvent(self):
         self.windowClass.launchScreen() 
     
-    #def containerScreenEvent(self):
-    #    self.windowClass.containerScreen() 
+    def containerScreenEvent(self):
+        self.windowClass.containerScreen() 

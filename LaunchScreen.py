@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 
 from PyQt5 import QtCore
-from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import QSizePolicy, QVBoxLayout, QHBoxLayout, QFrame, QPushButton, QLabel
+from PyQt5.QtWidgets import QVBoxLayout, QHBoxLayout, QFrame, QPushButton, QLabel
 
 class LaunchScreen(QFrame):
 
@@ -48,7 +47,7 @@ class LaunchScreen(QFrame):
 
         self.setLayout(verticalBox)
 
-    # Events
+    # navigation events
     def collectionEvent(self):
         self.windowClass.collectionScreen() 
 

@@ -7,7 +7,7 @@ QPushButton {
     border-bottom-color : rgb(4, 6, 25);
 
     font-family: 'Verdana';
-    font-size: 50pt;
+    font-size: 40pt;
 }
 
 QPushButton:hover {

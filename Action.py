@@ -7,6 +7,7 @@ from PyQt5.QtWidgets import QMainWindow, QDesktopWidget, QApplication
 from LaunchScreen import LaunchScreen
 from CollectionScreen import CollectionScreen
 from ChooseScreen import ChooseScreen
+from ContainerScreen import ContainerScreen
 
 class Action(QMainWindow):
 
@@ -42,7 +43,10 @@ class Action(QMainWindow):
         self.setCentralWidget(self.chooseScreenObject)
         self.show()
 
-
+    def containerScreen(self):
+        self.containerScreenObject = ContainerScreen(self)
+        self.setCentralWidget(self.containerScreenObject)
+        self.show()
 
 
 

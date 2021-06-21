@@ -19,7 +19,7 @@ class CollectionScreen(QFrame):
         upperHBox = QHBoxLayout()
         upperHBox.setAlignment(QtCore.Qt.AlignLeft)
 
-        scroll = QScrollArea() # Scroll Area which contains the widgets, set as the centralWidget
+        scroll = QScrollArea() 
         widget = QWidget() # Widget that contains the flowLayout            
 
         middleFlowLayout = FlowLayout() # The FlowLayout that contains all of the Collection buttons
@@ -30,8 +30,7 @@ class CollectionScreen(QFrame):
 
         headerLabel = QLabel('Your Collections', self)
         headerLabel.setStyleSheet(open("css/smallHeaderLabels.css").read())
-        headerLabel.setMinimumSize(1000,45)
-        headerLabel.setMaximumSize(1000,45)
+        headerLabel.setFixedHeight(45)
         upperHBox.addWidget(headerLabel)
 
         tempCollections = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
@@ -40,6 +39,7 @@ class CollectionScreen(QFrame):
             button.setMinimumSize(229,229)
             button.setMaximumSize(229,229)
             button.setStyleSheet(open('css/collectionButtons.css').read())
+            button.clicked.connect(self.containerScreenEvent)
             middleFlowLayout.addWidget(button)
 
         newButton = QPushButton('+', self)
@@ -73,8 +73,12 @@ class CollectionScreen(QFrame):
 
         self.setLayout(verticalBox)
 
+    # navigation events
     def launchScreenEvent(self):
         self.windowClass.launchScreen()
 
     def chooseScreenEvent(self):
         self.windowClass.chooseScreen() 
+
+    def containerScreenEvent(self):
+        self.windowClass.containerScreen()
