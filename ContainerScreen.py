@@ -2,7 +2,7 @@
 
 from FlowLayout import FlowLayout
 from PyQt5 import QtCore, QtGui
-from PyQt5.QtWidgets import QFrame, QHBoxLayout, QLabel, QLineEdit, QScrollArea, QVBoxLayout, QPushButton, QWidget
+from PyQt5.QtWidgets import QComboBox, QFrame, QHBoxLayout, QLabel, QLineEdit, QScrollArea, QVBoxLayout, QPushButton, QWidget
 
 class ContainerScreen(QFrame):
 
@@ -13,7 +13,6 @@ class ContainerScreen(QFrame):
         self.initScreen()
 
     def initScreen(self):
-        rightBoxWidth = 237 
         verticalBox = QVBoxLayout()
         verticalBox.setAlignment(QtCore.Qt.AlignTop)
 
@@ -26,35 +25,36 @@ class ContainerScreen(QFrame):
         middleFlowLayout = FlowLayout() # The FlowLayout that contains all of the Collection buttons
         middleFlowLayout.setSpacing(15)
 
-        lowerHBox = QHBoxLayout()
-        lowerHBox.setAlignment(QtCore.Qt.AlignRight)
-
-        self.headerLabel = QLabel('Collection Name', self)
-        self.headerLabel.setStyleSheet(open("css/smallHeaderLabels.css").read())
-        self.headerLabel.setFixedHeight(45)
-        upperHBox.addWidget(self.headerLabel)
-
-        self.editNameBox = QLineEdit(self)
-        self.editNameBox.setFixedWidth(320)
-        self.editNameBox.setFixedHeight(45)
-        self.editNameBox.returnPressed.connect(self.changeNameEvent)
-        self.editNameBox.setStyleSheet(open("css/textBoxes.css").read())
-        upperHBox.addWidget(self.editNameBox)
-        self.editNameBox.setHidden(True)
+        upperInHBox = QHBoxLayout()
+        upperInHBox.setAlignment(QtCore.Qt.AlignLeft)
+        upperInHBox.setGeometry
 
         self.editNameButton = QPushButton('\U0001F589',self)
         self.editNameButton.setMinimumSize(45,45)
         self.editNameButton.setMaximumSize(45,45)
         self.editNameButton.setStyleSheet(open('css/pencilButtons.css').read())
         self.editNameButton.clicked.connect(self.editNameEvent)
-        upperHBox.addWidget(self.editNameButton)
+        upperInHBox.addWidget(self.editNameButton)
 
-        upperHBox.addSpacing(999999) # large number to ensure max distance
+        self.headerLabel = QLabel('Collection Name', self)
+        self.headerLabel.setStyleSheet(open("css/smallHeaderLabels.css").read())
+        self.headerLabel.setFixedSize(999999,45)
+        upperInHBox.addWidget(self.headerLabel)
+
+        self.editNameBox = QLineEdit(self)
+        self.editNameBox.setFixedWidth(320)
+        self.editNameBox.setFixedHeight(45)
+        self.editNameBox.returnPressed.connect(self.changeNameEvent)
+        self.editNameBox.setStyleSheet(open("css/textBoxes.css").read())
+        upperInHBox.addWidget(self.editNameBox)
+        self.editNameBox.setHidden(True)
+
+        upperHBox.addLayout(upperInHBox)
 
         self.sideLabel = QLabel('Information', self)
         self.sideLabel.setStyleSheet(open("css/smallHeaderLabels.css").read())
         self.sideLabel.setFixedHeight(45)
-        self.sideLabel.setFixedWidth(rightBoxWidth)
+        self.sideLabel.setFixedWidth(237)
         upperHBox.addWidget(self.sideLabel)
 
         tempCollections = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
@@ -64,13 +64,14 @@ class ContainerScreen(QFrame):
             button.setMaximumSize(229,229)
             button.setStyleSheet(open('css/collectionButtons.css').read())
             button.installEventFilter(self)
+            button.clicked.connect(self.listScreenEvent)
             middleFlowLayout.addWidget(button)
 
         newButton = QPushButton('+', self)
         newButton.setMinimumSize(229,229)
         newButton.setMaximumSize(229,229)
         newButton.setStyleSheet(open('css/plusButtons.css').read())
-        #newButton.clicked.connect(self.listScreenEvent)
+        newButton.clicked.connect(self.listScreenEvent)
         middleFlowLayout.addWidget(newButton)
 
         widget.setContentsMargins(0, 18, 0, 18)
@@ -83,6 +84,26 @@ class ContainerScreen(QFrame):
         scroll.setWidgetResizable(True)
         scroll.setWidget(widget)
 
+        lowerHBox = QHBoxLayout()
+        lowerHBox.setAlignment(QtCore.Qt.AlignRight)
+
+        comboLabel = QLabel('Sort By: ', self)
+        comboLabel.setStyleSheet(open("css/smallLabels.css").read())
+        comboLabel.setFixedHeight(45)
+        lowerHBox.addWidget(comboLabel)
+        
+        tempSortList = ['Date Created    ', 'Recent', 'Color', 'Value']
+        sortCombo = QComboBox(self)
+        sortCombo.setEditable(True)
+        sortCombo.addItems(tempSortList)
+        sortCombo.setEditable(False)
+        sortCombo.setFixedWidth(170)
+        sortCombo.setStyleSheet(open("css/comboBoxes.css").read())
+        #sortCombo.activated.connect(self.sortComboEvent)
+        lowerHBox.addWidget(sortCombo)
+
+        lowerHBox.addSpacing(999999) # large number to ensure max distance
+
         backButton = QPushButton('\u21A9', self) 
         backButton.setMinimumSize(50,50)
         backButton.setMaximumSize(50,50)
@@ -90,6 +111,7 @@ class ContainerScreen(QFrame):
         backButton.clicked.connect(self.collectionScreenEvent)
         lowerHBox.addWidget(backButton)
 
+        # right side panel related widgets
         middleHBox = QHBoxLayout()
 
         rightMiddleVerticalBox = QVBoxLayout()
@@ -98,7 +120,7 @@ class ContainerScreen(QFrame):
         self.sideLabel2 = QLabel('Stuff goes here', self)
         self.sideLabel2.setStyleSheet(open("css/regularLabels.css").read())
         self.sideLabel2.setFixedHeight(45)
-        self.sideLabel2.setFixedWidth(rightBoxWidth)
+        self.sideLabel2.setFixedWidth(237)
         rightMiddleVerticalBox.addWidget(self.sideLabel2)
 
         rightMiddleVerticalBox.addSpacing(999999) # large number to ensure max distance
@@ -135,11 +157,11 @@ class ContainerScreen(QFrame):
         self.setLayout(verticalBox)
 
     # navigation events
-    def chooseScreenEvent(self):
-        self.windowClass.chooseScreen() 
-
     def collectionScreenEvent(self):
         self.windowClass.collectionScreen()
+
+    def listScreenEvent(self):
+        self.windowClass.listScreen()
 
     # hover events
     def eventFilter(self, object, event): # this is going to be a switch statement into more specific methods if / once I have to filter more than one objects event

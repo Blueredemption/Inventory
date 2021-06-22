@@ -1,0 +1,32 @@
+QComboBox {
+    background-color: rgb(4, 6, 35); 
+    border :1px solid; 
+    border-color : rgb(4,6,50); 
+
+
+    font-family: 'Verdana';
+    font-size: 15pt;
+}
+
+QComboBox:hover {
+    background-color: rgb(4, 6, 40);
+}
+
+QComboBox QAbstractItemView {
+    outline: 0px;
+    selection-background-color: rgb(4, 6, 40);
+}
+
+QComboBox::drop-down 
+{
+    border: 0px; 
+}
+
+QComboBox::down-arrow {
+    image: url('images/White Down Arrow.png');
+}
+
+QFrame {
+    border :1px solid; 
+    border-color : rgb(4,6,50); 
+}

@@ -2,7 +2,7 @@
 
 from FlowLayout import FlowLayout
 from PyQt5 import QtCore
-from PyQt5.QtWidgets import QFrame, QHBoxLayout, QLabel, QScrollArea, QVBoxLayout, QPushButton, QWidget
+from PyQt5.QtWidgets import QComboBox, QFrame, QHBoxLayout, QLabel, QScrollArea, QVBoxLayout, QPushButton, QWidget
 
 class CollectionScreen(QFrame):
 
@@ -24,9 +24,6 @@ class CollectionScreen(QFrame):
 
         middleFlowLayout = FlowLayout() # The FlowLayout that contains all of the Collection buttons
         middleFlowLayout.setSpacing(15)
-
-        lowerHBox = QHBoxLayout()
-        lowerHBox.setAlignment(QtCore.Qt.AlignRight)
 
         headerLabel = QLabel('Your Collections', self)
         headerLabel.setStyleSheet(open("css/smallHeaderLabels.css").read())
@@ -58,6 +55,26 @@ class CollectionScreen(QFrame):
         scroll.setStyleSheet(open("css/scrollArea.css").read())
         scroll.setWidgetResizable(True)
         scroll.setWidget(widget)
+
+        lowerHBox = QHBoxLayout()
+        lowerHBox.setAlignment(QtCore.Qt.AlignRight)
+
+        comboLabel = QLabel('Sort By: ', self)
+        comboLabel.setStyleSheet(open("css/smallLabels.css").read())
+        comboLabel.setFixedHeight(45)
+        lowerHBox.addWidget(comboLabel)
+        
+        tempSortList = ['Date Created    ', 'Recent', 'Color', 'Value']
+        sortCombo = QComboBox(self)
+        sortCombo.setEditable(True)
+        sortCombo.addItems(tempSortList)
+        sortCombo.setEditable(False)
+        sortCombo.setFixedWidth(170)
+        sortCombo.setStyleSheet(open("css/comboBoxes.css").read())
+        #sortCombo.activated.connect(self.sortComboEvent)
+        lowerHBox.addWidget(sortCombo)
+
+        lowerHBox.addSpacing(999999) # large number to ensure max distance
 
         backButton = QPushButton('\u21A9', self) 
         backButton.setMinimumSize(50,50)
