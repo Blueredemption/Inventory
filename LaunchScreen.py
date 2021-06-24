@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from PyQt5 import QtCore
+from PyQt5 import QtCore, QtGui
 from PyQt5.QtWidgets import QVBoxLayout, QHBoxLayout, QFrame, QPushButton, QLabel
 
 class LaunchScreen(QFrame):
@@ -11,41 +11,40 @@ class LaunchScreen(QFrame):
         self.setStyleSheet(open('css/window.css').read())
         self.initScreen()
 
-    def initScreen(self): # 
-        verticalBox = QVBoxLayout()
-        verticalBox.setAlignment(QtCore.Qt.AlignTop)
-        upperHBox = QHBoxLayout()
-        upperHBox.setAlignment(QtCore.Qt.AlignCenter)
-        lowerHBox = QHBoxLayout()
-        lowerHBox.setAlignment(QtCore.Qt.AlignCenter)
-        lowerHBox.setSpacing(50)
-        lowerHBox.setContentsMargins(50, 50, 50, 50)
+    def initScreen(self): # gui
+        QtGui.QFontDatabase.addApplicationFont("fonts\Lora\static\Lora-Regular.ttf")
 
-        titleLabel = QLabel('Inventory', self)
-        titleLabel.setStyleSheet(open("css/titleLabels.css").read())
-        titleLabel.setMinimumSize(650,190)
-        titleLabel.setMaximumSize(650,190)
-        upperHBox.addWidget(titleLabel)
+        self.verticalBox = QVBoxLayout()
+        self.verticalBox.setAlignment(QtCore.Qt.AlignTop)
+        self.upperHBox = QHBoxLayout()
+        self.upperHBox.setAlignment(QtCore.Qt.AlignCenter)
+        self.lowerHBox = QHBoxLayout()
+        self.lowerHBox.setAlignment(QtCore.Qt.AlignCenter)
+        self.lowerHBox.setSpacing(50)
+        self.lowerHBox.setContentsMargins(50, 50, 50, 50)
 
-        collectionsButton = QPushButton('Access Your\nCollections', self)
-        collectionsButton.setMinimumSize(350,350)
-        collectionsButton.setMaximumSize(350,350)
-        collectionsButton.setStyleSheet(open('css/bigButtons.css').read())
-        collectionsButton.clicked.connect(self.collectionEvent)
-        lowerHBox.addWidget(collectionsButton)
+        self.upperHBox.addSpacing(35)
+        
+        self.titleLabel = QLabel('Inventory', self)
+        self.titleLabel.setStyleSheet(open("css/titleLabels.css").read())
+        self.titleLabel.setFixedSize(650,195)
+        self.upperHBox.addWidget(self.titleLabel)
 
-        newButton = QPushButton('Make A New\nCollection', self) 
-        #newButton.setSizePolicy(QSizePolicy.Expanding,QSizePolicy.Expanding)
-        newButton.setMinimumSize(350,350)
-        newButton.setMaximumSize(350,350)
-        newButton.setStyleSheet(open('css/bigButtons.css').read())
-        newButton.clicked.connect(self.newEvent)
-        lowerHBox.addWidget(newButton)
+        self.collectionsButton = QPushButton('Access Your\nCollections', self)
+        self.collectionsButton.setFixedSize(350,350)
+        self.collectionsButton.setStyleSheet(open('css/bigButtons.css').read())
+        self.collectionsButton.clicked.connect(self.collectionEvent)
+        self.lowerHBox.addWidget(self.collectionsButton)
 
-        verticalBox.addLayout(upperHBox)
-        verticalBox.addLayout(lowerHBox)
+        self.newButton = QPushButton('Make A New\nCollection', self) 
+        self.newButton.setFixedSize(350,350)
+        self.newButton.setStyleSheet(open('css/bigButtons.css').read())
+        self.newButton.clicked.connect(self.newEvent)
+        self.lowerHBox.addWidget(self.newButton)
 
-        self.setLayout(verticalBox)
+        self.verticalBox.addLayout(self.upperHBox)
+        self.verticalBox.addLayout(self.lowerHBox)
+        self.setLayout(self.verticalBox)
 
     # navigation events
     def collectionEvent(self):

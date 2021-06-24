@@ -5,8 +5,9 @@ QPushButton {
     border-left-color : rgb(4,6,50);  
     border-right-color : rgb(4, 6, 25); 
     border-bottom-color : rgb(4, 6, 25);
+    border-radius: 3px;
 
-    font-family: 'Verdana';
+    font-family: 'Lora';
     font-size: 40pt;
 }
 

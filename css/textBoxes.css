@@ -1,5 +1,6 @@
 QLineEdit {
     border: none;
-    font-family: 'Verdana';
+    font-family: 'Lora';
     font-size: 20pt;
+    border-radius: 3px;
 }

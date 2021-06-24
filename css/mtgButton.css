@@ -5,11 +5,12 @@ QPushButton {
     border-left-color : rgb(4,6,50);  
     border-right-color : rgb(4, 6, 25); 
     border-bottom-color : rgb(4, 6, 25);
+    border-radius: 5px;
 
-    font-family: 'Verdana';
+    font-family: 'Lora';
     font-size: 25pt;
 
-    background-image :  url('images/MTG Icon.png');
+    background-image :  url('images/MTG_Icon.png');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;

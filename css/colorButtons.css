@@ -1,3 +1,4 @@
+
 QPushButton {
     background-color: rgb(4, 6, 35); 
     border :1px solid; 
@@ -5,10 +6,10 @@ QPushButton {
     border-left-color : rgb(4,6,50);  
     border-right-color : rgb(4, 6, 25); 
     border-bottom-color : rgb(4, 6, 25);
-    border-radius: 5px;
+    border-radius: 3px;
 
     font-family: 'Lora';
-    font-size: 20pt;
+    font-size: 25pt;
 }
 
 QPushButton:hover {

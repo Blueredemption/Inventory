@@ -2,9 +2,10 @@ QComboBox {
     background-color: rgb(4, 6, 35); 
     border :1px solid; 
     border-color : rgb(4,6,50); 
+    border-radius: 3px;
 
 
-    font-family: 'Verdana';
+    font-family: 'Lora';
     font-size: 15pt;
 }
 
@@ -23,7 +24,7 @@ QComboBox::drop-down
 }
 
 QComboBox::down-arrow {
-    image: url('images/White Down Arrow.png');
+    image: url('images/White_Down_Arrow.png');
 }
 
 QFrame {

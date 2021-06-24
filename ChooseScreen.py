@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 
-from PyQt5 import QtCore
-from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import QSizePolicy, QVBoxLayout, QHBoxLayout, QFrame, QPushButton, QLabel
+from PyQt5 import QtCore, QtGui
+from PyQt5.QtWidgets import  QVBoxLayout, QHBoxLayout, QFrame, QPushButton, QLabel
 
 class ChooseScreen(QFrame):
 
@@ -12,51 +11,49 @@ class ChooseScreen(QFrame):
         self.setStyleSheet(open('css/window.css').read())
         self.initScreen()
 
-    def initScreen(self): # 
-        verticalBox = QVBoxLayout()
-        verticalBox.setAlignment(QtCore.Qt.AlignTop)
-        upperHBox = QHBoxLayout()
-        upperHBox.setAlignment(QtCore.Qt.AlignCenter)
-        middleHBox = QHBoxLayout()
-        middleHBox.setAlignment(QtCore.Qt.AlignCenter)
-        middleHBox.setSpacing(50)
-        middleHBox.setContentsMargins(50, 50, 50, 50)
-        lowerHBox = QHBoxLayout()
-        lowerHBox.setAlignment(QtCore.Qt.AlignRight)
+    def initScreen(self): # gui
+        QtGui.QFontDatabase.addApplicationFont("fonts\Lora\static\Lora-Regular.ttf")
+        
+        self.verticalBox = QVBoxLayout()
+        self.verticalBox.setAlignment(QtCore.Qt.AlignTop)
+        self.upperHBox = QHBoxLayout()
+        self.upperHBox.setAlignment(QtCore.Qt.AlignCenter)
+        self.middleHBox = QHBoxLayout()
+        self.middleHBox.setAlignment(QtCore.Qt.AlignCenter)
+        self.middleHBox.setSpacing(50)
+        self.middleHBox.setContentsMargins(50, 50, 50, 50)
+        self.lowerHBox = QHBoxLayout()
+        self.lowerHBox.setAlignment(QtCore.Qt.AlignRight)
+        self.upperHBox.addSpacing(122)
 
-        headerLabel = QLabel('What Game?', self)
-        headerLabel.setStyleSheet(open("css/headerLabels.css").read())
-        headerLabel.setMinimumSize(450,190)
-        headerLabel.setMaximumSize(450,190)
-        upperHBox.addWidget(headerLabel)
+        self.headerLabel = QLabel('What Game?', self)
+        self.headerLabel.setStyleSheet(open("css/headerLabels.css").read())
+        self.headerLabel.setFixedSize(490,195)
+        self.upperHBox.addWidget(self.headerLabel)
 
-        mtgButton = QPushButton('', self)
-        mtgButton.setMinimumSize(350,350)
-        mtgButton.setMaximumSize(350,350)
-        mtgButton.setStyleSheet(open('css/mtgButton.css').read())
-        mtgButton.clicked.connect(self.containerScreenEvent)
-        middleHBox.addWidget(mtgButton)
+        self.mtgButton = QPushButton('', self)
+        self.mtgButton.setFixedSize(350,350)
+        self.mtgButton.setStyleSheet(open('css/mtgButton.css').read())
+        self.mtgButton.clicked.connect(self.containerScreenEvent)
+        self.middleHBox.addWidget(self.mtgButton)
 
-        soonButton = QPushButton('Coming Soon...?', self) 
-        soonButton.setMinimumSize(350,350)
-        soonButton.setMaximumSize(350,350)
-        soonButton.setStyleSheet(open('css/bigButtons.css').read())
-        soonButton.setEnabled(False)
-        middleHBox.addWidget(soonButton)
+        self.soonButton = QPushButton('Coming Soon...?', self) 
+        self.soonButton.setFixedSize(350,350)
+        self.soonButton.setStyleSheet(open('css/bigButtons.css').read())
+        self.soonButton.setEnabled(False)
+        self.middleHBox.addWidget(self.soonButton)
 
-        backButton = QPushButton('\u21A9', self) 
-        backButton.setMinimumSize(50,50)
-        backButton.setMaximumSize(50,50)
-        backButton.setStyleSheet(open('css/returnButtons.css').read())
-        backButton.clicked.connect(self.launchScreenEvent)
-        lowerHBox.addWidget(backButton)
+        self.backButton = QPushButton('\u21A9', self) 
+        self.backButton.setFixedSize(50,50)
+        self.backButton.setStyleSheet(open('css/returnButtons.css').read())
+        self.backButton.clicked.connect(self.launchScreenEvent)
+        self.lowerHBox.addWidget(self.backButton)
 
-        verticalBox.addLayout(upperHBox)
-        verticalBox.addLayout(middleHBox)
-        verticalBox.addSpacing(999999) # large number to ensure max distance
-        verticalBox.addLayout(lowerHBox)
-
-        self.setLayout(verticalBox)
+        self.verticalBox.addLayout(self.upperHBox)
+        self.verticalBox.addLayout(self.middleHBox)
+        self.verticalBox.addSpacing(999999) # large number to ensure max distance
+        self.verticalBox.addLayout(self.lowerHBox)
+        self.setLayout(self.verticalBox)
 
     # navigation events
     def launchScreenEvent(self):
