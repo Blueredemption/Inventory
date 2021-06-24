@@ -67,7 +67,7 @@ class ListScreen(QFrame):
         self.newButton = QPushButton('+', self)
         self.newButton.setFixedSize(229,320)
         self.newButton.setStyleSheet(open('css/plusButtons.css').read())
-        #self.newButton.clicked.connect(self.searchScreenEvent)
+        self.newButton.clicked.connect(self.searchScreenEvent)
         self.middleFlowLayout.addWidget(self.newButton)
 
         self.boxWidget.setContentsMargins(0, 18, 0, 18)
@@ -91,33 +91,32 @@ class ListScreen(QFrame):
             self.listHBox = QHBoxLayout()
             
             self.button = QPushButton(str(i), self)
-            self.button.setFixedSize(57,80)
+            self.button.setFixedSize(75,104)
             self.button.setStyleSheet(open('css/smallButtons.css').read())
             self.button.clicked.connect(self.detailScreenEvent)
             self.button.installEventFilter(self)
             self.listHBox.addWidget(self.button)
 
             for j in range(1, 4):
-                self.listLabel = QLabel(str(i) +' '  +str(j) +' Information', self)
+                self.listLabel = QLabel(str(i) +' '  +str(j) +' Information\n' +str(i) +' '  +str(j) +' Information\n' +str(i) +' '  +str(j) +' Information', self)
                 self.listLabel.setStyleSheet(open("css/smallLabels.css").read())
                 self.listLabel.installEventFilter(self)
-                self.listLabel.setFixedHeight(50)
+
                 self.listHBox.addWidget(self.listLabel)
 
             self.leftMiddleVerticalBox.addLayout(self.listHBox)
 
         self.listHBox = QHBoxLayout()
         self.newListButton = QPushButton('+', self)
-        self.newListButton.setFixedSize(57,80)
+        self.newListButton.setFixedSize(75,104)
         self.newListButton.setStyleSheet(open('css/smallPlusButtons.css').read())
-        #self.newListButton.clicked.connect(self.searchScreenEvent)
+        self.newListButton.clicked.connect(self.searchScreenEvent)
         self.listHBox.addWidget(self.newListButton)
 
         # this seemingly pointless 3 labels keeps the HBoxes symetrical, allowing for them to grow as the window grows. its odd, remove this and everything sticks to the far left.
         for i in range(1, 4):
             self.listLabel = QLabel('', self)
             self.listLabel.setStyleSheet(open("css/smallLabels.css").read())
-            self.listLabel.setFixedHeight(50)
             self.listHBox.addWidget(self.listLabel)
             
         self.leftMiddleVerticalBox.addLayout(self.listHBox)
@@ -250,6 +249,9 @@ class ListScreen(QFrame):
             deleteMsg.exec_()
         else:
             ()#self.windowClass.detailScreen()
+
+    def searchScreenEvent(self):
+        self.windowClass.searchScreen()
 
     # delete event
     def deleteEvent(self, response):

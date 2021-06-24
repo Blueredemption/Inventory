@@ -1,6 +1,11 @@
-QLineEdit {
+QLabel {
     font-family: 'Lora';
     font-size: 20pt;
+}
+
+QLineEdit {
+    font-family: 'Lora';
+    font-size: 15pt;
     
     border-style: outset;
     border-width: 2px;
