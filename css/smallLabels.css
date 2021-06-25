@@ -2,3 +2,13 @@ QLabel {
     font-family: 'Lora';
     font-size: 15pt;
 }
+
+QRadioButton {
+    font-family: 'Lora';
+    font-size: 12pt;
+}
+
+QCheckBox {
+    font-family: 'Lora';
+    font-size: 12pt;
+}

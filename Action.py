@@ -10,6 +10,7 @@ from ChooseScreen import ChooseScreen
 from ContainerScreen import ContainerScreen
 from ListScreen import ListScreen
 from SearchScreen import SearchScreen
+from DetailScreen import DetailScreen
 
 class Action(QMainWindow):
 
@@ -59,6 +60,12 @@ class Action(QMainWindow):
         self.searchScreenObject = SearchScreen(self)
         self.setCentralWidget(self.searchScreenObject)
         self.show()
+
+    def detailScreen(self):
+        self.detailScreenObject = DetailScreen(self)
+        self.setCentralWidget(self.detailScreenObject)
+        self.show()
+
 
     ##
     def setSize(self):

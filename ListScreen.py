@@ -180,7 +180,7 @@ class ListScreen(QFrame):
         self.searchBox.setStyleSheet(open("css/searchBoxes.css").read())
         self.lowerHBox.addWidget(self.searchBox)
 
-        self.lowerHBox.addSpacing(999999) # large number to ensure max distanceS
+        self.lowerHBox.addSpacing(999999) # large number to ensure max distance
         
         self.backButton = QPushButton('\u21A9', self) 
         self.backButton.setFixedSize(50,50)
@@ -248,7 +248,7 @@ class ListScreen(QFrame):
             deleteMsg.buttonClicked.connect(self.deleteEvent)
             deleteMsg.exec_()
         else:
-            ()#self.windowClass.detailScreen()
+            self.windowClass.detailScreen()
 
     def searchScreenEvent(self):
         self.windowClass.searchScreen()
@@ -287,8 +287,8 @@ class ListScreen(QFrame):
         Boolean = self.scrollLists.isVisible()
         self.scrollLists.setVisible(not Boolean)
         self.scrollBoxes.setVisible(Boolean)
-        self.viewListButton.setEnabled(not Boolean)
-        self.viewCardButton.setEnabled(Boolean)
+        self.viewListButton.setEnabled(Boolean)
+        self.viewCardButton.setEnabled(not Boolean)
 
     # search event
     def searchEvent(self):

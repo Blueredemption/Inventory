@@ -1,9 +1,8 @@
 #!/usr/bin/python3
 
-from PyQt5 import QtGui, QtWidgets
-from FlowLayout import FlowLayout
+from PyQt5 import QtGui
 from PyQt5 import QtCore
-from PyQt5.QtWidgets import QCheckBox, QComboBox, QFrame, QHBoxLayout, QLabel, QLineEdit, QMessageBox, QScrollArea, QVBoxLayout, QPushButton, QWidget
+from PyQt5.QtWidgets import QCheckBox, QFrame, QHBoxLayout, QLabel, QLineEdit, QScrollArea, QVBoxLayout, QPushButton, QWidget
 
 class SearchScreen(QFrame):
 
@@ -135,7 +134,7 @@ class SearchScreen(QFrame):
 
     # navigation events
     def detailScreenEvent(self):
-        self.windowClass.chooseScreen() 
+        self.windowClass.detailScreen() 
 
     def listScreenEvent(self):
         self.windowClass.listScreen()
