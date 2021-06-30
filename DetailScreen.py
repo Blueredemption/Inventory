@@ -76,7 +76,7 @@ class DetailScreen(QFrame):
             self.addButton.clicked.connect(self.addCardEvent)
             self.lowerHBox.addWidget(self.addButton)
         else:
-            tempList = ['Move Card', 'Remove Card', 'Container 1', 'Container 2', 'Container 3', 'Etc.']
+            tempList = ['Move Card', 'Remove Card', 'Container 1', 'Container 2', 'Container 3', 'Add Another']
             self.optionsCombo = QComboBox(self)
             self.optionsCombo.setEditable(True)
             self.optionsCombo.addItems(tempList)
