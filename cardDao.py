@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 
-class cardDao():
+class CardDao():
 
     def __init__(self): # constructor
         super().__init__()
         self.create()
-        self.read()
+        self.return()
         self.update()
         self.delete()
         self.populate()
@@ -13,7 +13,7 @@ class cardDao():
     def create(self): # there will be create for cards
         print('Create')
 
-    def read(self):
+    def return(self):
         print('Read')
 
     def update(self):
@@ -27,7 +27,7 @@ class cardDao():
 
 
 def main():
-    run = cardDao()
+    run = CardDao()
     
 
 if __name__ == '__main__':
